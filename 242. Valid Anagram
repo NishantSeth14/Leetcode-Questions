@@ -1,0 +1,32 @@
+
+
+class Solution {
+public:
+    bool isAnagram(string s, string t) {
+        if (s.size() != t.size()) {
+            return false;  // Anagrams must have the same length
+        }
+
+        // Use an array to count the occurrences of each character
+        int charCount[26] = {0};
+
+        // Count occurrences in string s
+        for (char c : s) {
+            charCount[c - 'a']++;
+        }
+
+        // Subtract occurrences in string t
+        for (char c : t) {
+            charCount[c - 'a']--;
+        }
+
+        // Check if all counts are zero
+        for (int count : charCount) {
+            if (count != 0) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+};
