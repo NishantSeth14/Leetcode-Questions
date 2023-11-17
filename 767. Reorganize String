@@ -1,0 +1,66 @@
+class Solution {
+public:
+    string reorganizeString(string s) {
+        
+        //first create a hash map
+        int hash[26] = {0};
+        for(int i=0; i<s.size(); i++){
+            hash[s[i] - 'a']++;
+        }
+
+        //finding the max element and max occurence
+        char max_element;
+        int max_occ = INT_MIN;
+        for(int i=0; i<26; i++){
+            if(hash[i] > max_occ){
+                max_occ = hash[i];
+                max_element = i + 'a';
+            }
+        }
+
+        int index = 0;
+        while(max_occ > 0 && index < s.size()){
+            s[index] = max_element;
+            max_occ--;
+            index += 2;
+        }
+
+        if(max_occ != 0){
+            return "";
+        }
+
+        hash[max_element - 'a'] = 0;
+
+        for(int i=0; i<26; i++){
+            while(hash[i] > 0){
+                index = index >= s.size() ? 1 : index;
+                s[index] = i + 'a';
+                hash[i]--;
+                index += 2;
+            }
+        }
+        return s;
+    }
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
