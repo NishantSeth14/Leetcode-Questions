@@ -1,0 +1,59 @@
+#include <unordered_map>
+#include <string>
+
+class Solution {
+public:
+    bool isIsomorphic(std::string s, std::string t) {
+        if (s.size() != t.size()) {
+            return false;
+        }
+
+        std::unordered_map<char, char> mapping_s_t;
+        std::unordered_map<char, char> mapping_t_s;
+
+        for (int i = 0; i < s.size(); ++i) {
+            char char_s = s[i];
+            char char_t = t[i];
+
+            // Check if the mapping from s to t is consistent
+            if (mapping_s_t.find(char_s) != mapping_s_t.end() && mapping_s_t[char_s] != char_t) {
+                return false;
+            }
+
+            // Check if the mapping from t to s is consistent
+            if (mapping_t_s.find(char_t) != mapping_t_s.end() && mapping_t_s[char_t] != char_s) {
+                return false;
+            }
+
+            // Update the mappings
+            mapping_s_t[char_s] = char_t;
+            mapping_t_s[char_t] = char_s;
+        }
+
+        return true;
+    }
+};
+
+
+class Solution {
+public:
+    bool isIsomorphic(string s, string t) {
+        
+        int hashMap[256] = {0};
+        bool istCharsMapped[256] = {0};
+
+        for(int i=0; i<s.size(); i++){
+            if(hashMap[s[i]] == 0 && istCharsMapped[t[i]] == 0){
+                hashMap[s[i]] = t[i];
+                istCharsMapped[t[i]] = true;
+            }
+        } 
+        for(int i=0; i<s.size(); i++){
+            if(char(hashMap[s[i]]) != t[i]){
+                return false;
+            }
+        }
+       
+        return true;
+    }
+};
