@@ -1,0 +1,14 @@
+class Solution {
+public:
+    vector<vector<int>> transpose(vector<vector<int>>& matrix) {
+        int rowSize = matrix.size(); 
+        int colSize = matrix[0].size();
+        vector<vector<int>> ans(colSize, vector<int>(rowSize));
+        for(int i=0; i < colSize; i++){
+            for(int j=0; j < rowSize; j++){
+                ans[i][j] = matrix[j][i];
+            }
+        }
+        return ans;
+    }
+};
