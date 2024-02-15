@@ -1,0 +1,10 @@
+    if(x==1){
+        return head->next;
+    }
+    Node* p=head,*q=head;
+    for(int i=0;i<x-2;i++){
+        p=p->next;
+        q=q->next;
+    }
+    q->next=p->next->next;
+    return head;
