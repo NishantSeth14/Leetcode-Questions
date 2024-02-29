@@ -1,0 +1,22 @@
+class Solution
+{
+    public:
+    struct node *reverseIt (struct node *head, int k)
+    { 
+        node *nex = NULL;
+        node *prev = NULL;
+        int c = 0;
+        node* curr = head;
+        while(curr != NULL && c<k){
+            nex = curr->next;
+            curr->next = prev;
+            prev = curr;
+            curr = nex;
+            c++;
+        }
+        if(nex != NULL){
+            head->next = reverseIt(nex, k);
+        }
+        return prev;
+    }
+};
