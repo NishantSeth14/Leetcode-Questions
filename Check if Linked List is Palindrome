@@ -1,0 +1,35 @@
+class Solution{
+  public:
+  
+    Node* reverseList(Node* head){
+        Node* dummy = NULL;
+        while(head != NULL){
+            Node* nex = head->next;
+            head->next = dummy;
+            dummy = head;
+            head = nex;
+        }
+        return dummy;
+    }
+  
+    //Function to check whether the list is palindrome.
+    bool isPalindrome(Node *head)
+    {
+        Node* slow = head;
+        Node* fast = head;
+        while(fast && fast->next){
+            slow = slow->next;
+            fast = fast->next->next;
+        }
+        slow = reverseList(slow);
+        Node *temp = head;
+        while(slow != NULL){
+            if(temp->data != slow->data){
+                return false;
+            }
+            temp = temp->next;
+            slow = slow->next;
+        }
+        return true;
+    }
+};
