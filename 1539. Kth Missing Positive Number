@@ -1,0 +1,37 @@
+#include <vector>
+#include <algorithm>
+using namespace std;
+
+class Solution {
+public:
+    bool binarySearch(vector<int>& arr, int element) {
+        int start = 0;
+        int end = arr.size() - 1;
+        while (start <= end) {
+            int mid = start + (end - start) / 2;
+            if (arr[mid] == element) {
+                return true;
+            } else if (element < arr[mid]) {
+                end = mid - 1;
+            } else {
+                start = mid + 1;
+            }
+        }
+        return false;
+    }
+
+    int findKthPositive(vector<int>& arr, int k) {
+        vector<int> missingNumbers;
+        int n = arr.size();
+        int current = 1;  // Start from 1
+
+        while (missingNumbers.size() < k) {
+            if (!binarySearch(arr, current)) {
+                missingNumbers.push_back(current);
+            }
+            current++;
+        }
+
+        return missingNumbers[k - 1];
+    }
+};
