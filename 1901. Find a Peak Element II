@@ -1,0 +1,20 @@
+class Solution {
+public:
+    vector<int> findPeakGrid(vector<vector<int>>& mat) {
+        int n = mat.size();
+        int m = mat[0].size();
+        int maxElement = INT_MIN;
+        int row = 0;
+        int col = 0;
+        for(int i = 0; i < n; i++){
+            for(int j = 0; j < m; j++){
+                if(maxElement < mat[i][j]){
+                    maxElement = mat[i][j];
+                    row = i;
+                    col = j;
+                }
+            }
+        }
+        return vector<int>{row, col};
+    }
+};
