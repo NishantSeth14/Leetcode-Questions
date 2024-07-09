@@ -1,0 +1,15 @@
+class Solution {
+public:
+    double averageWaitingTime(vector<vector<int>>& customers) {
+        double totalWaitingTime = 0;
+        int currTotal = 0;
+        for(auto& customer : customers){
+            if(currTotal < customer[0]){
+                currTotal = customer[0];
+            }
+            currTotal = currTotal + customer[1];
+            totalWaitingTime += currTotal - customer[0];
+        }
+        return (totalWaitingTime/customers.size());
+    }
+};
