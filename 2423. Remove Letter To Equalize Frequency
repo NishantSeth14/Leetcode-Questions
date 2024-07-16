@@ -1,0 +1,30 @@
+class Solution {
+public:
+    bool equalFrequency(string word) {
+        int l = 0;
+        int n = word.size();
+        unordered_map<char,int> mp;
+        for(auto i : word){
+            mp[i]++;
+        }
+        if(mp.size() == n){
+            return 1;
+        }
+        while(l <= n){
+            int cnt = 0;
+            for(auto &i : mp){
+                if(i.second < l){
+                    cnt += i.second;
+                }
+                else{
+                    cnt += i.second - l;
+                }
+            }
+            if(cnt == 1){
+                return 1;
+            }
+            l++;
+        }
+        return 0;
+    }
+};
