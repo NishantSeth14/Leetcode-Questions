@@ -1,0 +1,33 @@
+class Solution {
+public:
+    bool arrayStringsAreEqual(vector<string>& word1, vector<string>& word2) {
+        int i = 0;
+        int j = 0;
+        int inPoin1 = 0;
+        int inPoin2 = 0;
+
+        while(i < word1.size() && j < word2.size()){
+            string s1 = word1[i];
+            string s2 = word2[j];
+            while(inPoin1 < s1.length() && inPoin2 < s2.length()){
+                if(s1[inPoin1] != s2[inPoin2]){
+                    return false;
+                }
+                inPoin1++;
+                inPoin2++;
+            }
+            if(inPoin1 == s1.length()){
+                i++;
+                inPoin1 = 0;
+            }
+            if(inPoin2 == s2.length()){
+                j++;
+                inPoin2 = 0;
+            }
+        }
+        if(i != word1.size() || j != word2.size()){
+            return false;
+        }
+        return true;
+    }
+};
