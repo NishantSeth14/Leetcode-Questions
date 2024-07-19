@@ -1,0 +1,15 @@
+class Solution {
+public:
+    int largestAltitude(vector<int>& gain) {
+        int prefixSum = 0;
+        int ans = INT_MIN;
+        for(int i = 0; i < gain.size(); i++){
+            prefixSum = prefixSum + gain[i];
+            ans = max(prefixSum, ans);
+        }
+        if(ans < 0){
+            return 0;
+        }
+        return ans;
+    }
+};
