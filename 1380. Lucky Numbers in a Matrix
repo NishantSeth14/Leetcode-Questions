@@ -1,0 +1,48 @@
+class Solution {
+public:
+    vector<int> luckyNumbers (vector<vector<int>>& matrix) {
+        int m = matrix.size();
+        int n = matrix[0].size();
+        vector<int> minRow;
+        vector<int> maxCol;
+        vector<int> ans;
+        for(int row = 0; row < m; row++){
+            int minEle = INT_MAX;
+            for(int col = 0; col < n; col++){
+                minEle = min(minEle, matrix[row][col]);
+            }
+            minRow.push_back(minEle);
+        }
+        for(int col = 0; col < n; col++){
+            int maxEle = INT_MIN;
+            for(int row = 0; row < m; row++){
+                maxEle = max(maxEle, matrix[row][col]);
+            }
+            maxCol.push_back(maxEle);
+        }
+        for(int i = 0; i < m; i++){
+            for(int j = 0; j < n; j++){
+                if(matrix[i][j] == minRow[i] && matrix[i][j] == maxCol[j]){
+                    ans.push_back(matrix[i][j]);
+                }
+            }
+        }
+        return ans;
+    }
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
