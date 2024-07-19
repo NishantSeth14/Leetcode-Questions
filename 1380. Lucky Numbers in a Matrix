@@ -33,6 +33,66 @@ public:
 
 
 
+//2nd approach
+
+
+
+
+class Solution {
+public:
+    vector<int> luckyNumbers (vector<vector<int>>& matrix) {
+        int m = matrix.size();
+        int n = matrix[0].size();
+        vector<int> minRow;
+        vector<int> maxCol;
+        vector<int> ans;
+        for(int row = 0; row < m; row++){
+            int minEle = INT_MAX;
+            for(int col = 0; col < n; col++){
+                minEle = min(minEle, matrix[row][col]);
+            }
+            minRow.push_back(minEle);
+        }
+        for(int col = 0; col < n; col++){
+            int maxEle = INT_MIN;
+            for(int row = 0; row < m; row++){
+                maxEle = max(maxEle, matrix[row][col]);
+            }
+            maxCol.push_back(maxEle);
+        }
+        int maxi = INT_MIN;
+        for(int i = 0; i < minRow.size(); i++){
+            maxi = max(maxi, minRow[i]);
+        }
+        int mini = INT_MAX;
+        for(int i = 0; i < maxCol.size(); i++){
+            mini = min(mini, maxCol[i]);
+        }
+        if(maxi == mini){
+            ans.push_back(maxi);
+        }
+        return ans;
+    }
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
