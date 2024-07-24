@@ -1,0 +1,71 @@
+class Solution {
+public:
+    string mapped(string &num, vector<int> &mapping) {
+        string mappedNum = "";
+        for (int i = 0; i < num.length(); i++) {
+            char ch = num[i];
+            int intCh = ch - '0';
+            mappedNum += to_string(mapping[intCh]);
+        }
+        return mappedNum;
+    }
+
+    vector<int> sortJumbled(vector<int>& mapping, vector<int>& nums) {
+        int n = nums.size();
+        vector<pair<int, int>> mp;
+        for (int i = 0; i < n; i++) {
+            string numStr = to_string(nums[i]);
+            string mappedStr = mapped(numStr, mapping);
+            int mappedInt = stoi(mappedStr);
+            mp.push_back({mappedInt, i});
+        }
+        sort(begin(mp), end(mp));
+        vector<int> ans;
+        for (auto &p : mp) {
+            int originalIndex = p.second;
+            ans.push_back(nums[originalIndex]);
+        }
+        return ans;
+    }
+};
+
+
+
+// 2nd Approach
+
+
+class Solution {
+public:
+
+    int getMappedNum(int num, vector<int>& mapping){
+        if(num < 10){
+            return mapping[num];
+        }
+        int placeValue = 1;
+        int mappedNum = 0;
+        while(num != 0){
+            int digit = num % 10;
+            int mappedDigit = mapping[digit];
+            mappedNum += mappedDigit * placeValue;
+            placeValue *= 10;
+            num = num/10;
+        }
+        return mappedNum;
+    }
+
+    vector<int> sortJumbled(vector<int>& mapping, vector<int>& nums) {
+        vector<pair<int,int> > vec;
+        int n = nums.size();
+        for(int i = 0; i < n; i++){
+            int mappedNum = getMappedNum(nums[i], mapping);
+            vec.push_back({mappedNum, i});
+        }
+        sort(begin(vec), end(vec));
+        vector<int> result;
+        for(auto &p : vec){
+            int originalIndex = p.second;
+            result.push_back(nums[originalIndex]);
+        }
+        return result;
+    }
+};
