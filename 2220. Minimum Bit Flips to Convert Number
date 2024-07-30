@@ -1,0 +1,63 @@
+class Solution {
+public:
+
+    string binary(int start){
+        string ans = "";
+        while(start != 0){
+            if(start % 2 == 1){
+                ans += '1';
+            }
+            else{
+                ans += '0';
+            }
+            start = start/2;
+        }
+        reverse(ans.begin(), ans.end());
+        return ans;
+    }
+
+    int minBitFlips(int start, int goal) {
+        string num1 = binary(start);
+        string num2 = binary(goal); 
+
+        int count = 0;
+        
+        if(num1.size() < num2.size()){
+            num1 = string(num2.size() - num1.size(), '0') + num1;
+        } else if(num2.size() < num1.size()){
+            num2 = string(num1.size() - num2.size(), '0') + num2;
+        }
+        for(int i = 0; i < num1.size(); i++){
+            if(num1[i] != num2[i]){
+                count++;
+            }
+        }
+        return count;
+    }
+};
+
+2nd Approach using bitwise
+
+class Solution {
+public:
+    int minBitFlips(int start, int goal) {
+        int ans = start ^ goal;
+        int count= 0;
+        for(int i = 0; i < 31; i++){
+            if(ans & (1 << i)){
+                count = count + 1;
+            }
+        }
+        return count;
+    }
+};
+
+
+
+
+
+
+
+
+
+
