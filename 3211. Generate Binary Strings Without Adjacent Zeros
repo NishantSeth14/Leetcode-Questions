@@ -40,3 +40,33 @@ public:
         return ans;
     }
 };
+
+
+
+//2nd Approach
+
+class Solution {
+public:
+
+    void fun(int prev, string& curr, int& n, vector<string>& ans){
+        if(curr.length() == n){
+            ans.push_back(curr);
+            return ;
+        }
+        if((prev == 1) || (prev == -1)){
+            curr.push_back('0');
+            fun(0, curr, n, ans);
+            curr.pop_back();
+        }
+        curr.push_back('1');
+        fun(1, curr, n, ans);
+        curr.pop_back();
+    }
+
+    vector<string> validStrings(int n) {
+        vector<string> ans;
+        string curr = "";
+        fun(-1, curr, n, ans);
+        return ans;
+    }
+};
