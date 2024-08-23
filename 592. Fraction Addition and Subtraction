@@ -1,0 +1,61 @@
+class Solution {
+public:
+    string fractionAddition(string expression) {
+        int nume = 0;
+        int deno = 1;
+
+        int n = expression.length();
+        int i = 0;
+        while(i < n){
+            int currNume = 0;
+            int currDeno = 0;
+            //checking negative
+            bool isNeg = (expression[i] == '-');
+            if(expression[i] == '-' || expression[i] == '+'){
+                i++;
+            }
+            //making numerator
+            while(i < n && isdigit(expression[i])){
+                int val = expression[i] - '0';
+                currNume = (currNume * 10) + val;
+                i++;
+            }
+            i++;
+            if(isNeg){
+                currNume *= -1;
+            }
+            //making denominator
+            while(i < n && isdigit(expression[i])){
+                int val = expression[i] - '0';
+                currDeno = (currDeno * 10) + val;
+                i++;
+            }
+            nume = nume * currDeno + currNume * deno;
+            deno = deno * currDeno;
+        }
+        int GCD = abs(__gcd(nume, deno));
+        nume = nume/GCD;
+        deno = deno/GCD;
+
+        return to_string(nume) + '/' + to_string(deno);
+    }
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
